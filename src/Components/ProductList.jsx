@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import Card from "./Card";
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
@@ -76,19 +76,16 @@ const ProductList = () => {
   // fetchData();
 
   return (
-    <div className="container mx-20">
-      <h1 className="mb-12">Product List </h1>
-      <ul>
+    <div >
+      <div className="container mx-auto justify-center">
+      <img src="https://psp-logos.uptimerobot.com/logos/2021049-1676548510.png" alt="" />
+
+      </div>
+      <h1 className="ml-28 text-3xl font-bold my-10">Product List </h1>
+      <ul className="container shadow-lg mx-auto">
         {productData.map((product) => (
           <li key={product.productNumber}>
-            <h2 className="font-bold text-xl">{product.productName}</h2>
-            <Link to={`/product/${encodeURIComponent(product.productNumber)}`}>
-              <button
-                className=" my-4 mx-10 bg-blue-600"
-               >
-                View Details (with API call)
-              </button>
-            </Link>
+             <Card productName={product.productName}  productNumber={product.productNumber} />
           </li>
         ))}
       </ul>

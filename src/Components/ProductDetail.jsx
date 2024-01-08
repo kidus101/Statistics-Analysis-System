@@ -34,9 +34,9 @@ const ProductDetails = () => {
   }, [productNumber]);
 
   return (
-    <div>
+    <div className="container mx-auto shadow-lg mt-20">
       {productDetails ? (
-        <div>
+        <div className="py-10 space-y-10">
           <h2>Data: {productNumber}</h2>
           <h2>Count: {productDetails.not_present_dates[0].count}</h2>
           <h2>Date: {productDetails.not_present_dates[0].date}</h2>
