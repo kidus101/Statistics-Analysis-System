@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Card from "./Card";
+import GraphChat from "./GraphChart";
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
@@ -75,20 +76,58 @@ const ProductList = () => {
 
   // fetchData();
 
-  return (
-    <div >
-      <div className="container mx-auto justify-center">
-      <img src="https://psp-logos.uptimerobot.com/logos/2021049-1676548510.png" alt="" />
+  const data = {
+    labels: [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ],
+    datasets: [
+      {
+        label: "Sinusoidal",
+        data: [0, 150, 120, 250, 280, 120, 210, 180, 120, 200, 150, 200],
+        fill: false,
+        backgroundColor: "rgba(0, 0, 255, 0.5)",
+        borderColor: "rgba(0, 0, 255, 0.5)",
+      },
+    ],
+  };
 
+  return (
+    <div className="bg-[#F4F4F4] shadow-3xl ">
+      <div className="flex justify-between px-28 bg-[#131A26]  py-10">
+        <img
+          className="bg-[#131A26] "
+          src="https://psp-logos.uptimerobot.com/logos/2021049-1676548510.png"
+          alt=""
+        />
+
+        <div className="text-xl align-center text-white">Service status</div>
       </div>
-      <h1 className="ml-28 text-3xl font-bold my-10">Product List </h1>
-      <ul className="container shadow-lg mx-auto">
-        {productData.map((product) => (
-          <li key={product.productNumber}>
-             <Card productName={product.productName}  productNumber={product.productNumber} />
-          </li>
-        ))}
-      </ul>
+      <h1 className="ml-28 text-3xl font-bold my-10">Products List </h1>
+      <div className=" container mx-auto bg-white">
+        <ul className="container mx-auto">
+          {productData.map((product) => (
+            <li key={product.productNumber}>
+              <Card
+                productName={product.productName}
+                productNumber={product.productNumber}
+              />
+              <GraphChat data={data} />
+            </li>
+          ))}
+        </ul>
+        <div className="border border-gray-200 h-px mt-2"></div>
+      </div>
     </div>
   );
 };
