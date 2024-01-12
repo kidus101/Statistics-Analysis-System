@@ -11,15 +11,6 @@ function GraphChart({ data, graphName }) {
     maintainAspectRatio: false,
     scales: {
       y: {
-        title: {
-          display: true,
-          text: "User  Co u n t",
-          align: "center",
-          font: {
-            weight: "bold",
-            color: "black",
-          },
-        },
         ticks: {
           stepSize: 5,
           min: 50,
@@ -45,8 +36,8 @@ function GraphChart({ data, graphName }) {
     },
     plugins: {
       title: {
-        display: true,
-        text:"  ",
+        display: false,
+        text: "  ",
         align: "start",
         font: {
           size: 20,
