@@ -99,20 +99,20 @@ const ProductList = () => {
       },
     },
   };
- 
+
 
   return (
     <div className="bg-[#F4F4F4] shadow-3xl ">
-      <div className="flex justify-between px-28 bg-[#131A26]  py-10">
+      <div className="flex justify-between px-28 sm:px-28 bg-[#131A26]  py-10">
         <img
           className="bg-[#131A26] "
           src="https://psp-logos.uptimerobot.com/logos/2021049-1676548510.png"
           alt=""
         />
 
-        <div className="flex">
-          <p className="flex justify-center items-center text-white text-3xl "> Service Status </p>
-        </div>
+      <div className="flex">
+        <p className=" justify-center items-center text-white text-3xl hidden sm:flex"> Service Status </p>
+      </div>
 
       </div>
       <h1 className="ml-28 text-3xl font-bold my-10">Products List </h1>
@@ -120,12 +120,14 @@ const ProductList = () => {
         <ul className="container mx-auto">
         {data.map((data, index) => (
          
-            <li key={index}>
+            <li className="rounded-lg" key={index}>
               <Card
                 productName={productData[index].productName}
                 productNumber={productData[index].productNumber}
               />
-              <GraphChat data={data} options={options} />
+             <div className=" ">
+              <GraphChat  data={data} options={options} />
+             </div>
             </li>
           ))}
         </ul>

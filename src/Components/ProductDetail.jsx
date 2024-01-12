@@ -34,7 +34,7 @@ const ProductDetails = () => {
   }, [productNumber]);
 
   return (
-    <div className="container mx-auto shadow-lg mt-20">
+    <div className="container  mx-auto shadow-lg mt-20">
       {productDetails ? (
         <div className="py-10 space-y-10">
           <h2>Data: {productNumber}</h2>
