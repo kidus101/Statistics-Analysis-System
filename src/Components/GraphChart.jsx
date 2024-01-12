@@ -19,7 +19,7 @@ function GraphChart({ data ,  graphName }) {
           },
         },
         ticks: {
-          stepSize: 50,
+          stepSize: 5,
           min: 50,
         },
         grid: {
@@ -58,13 +58,16 @@ function GraphChart({ data ,  graphName }) {
       datalabels: {
         align: "center",
         anchor: "center",
-        color: "#fff",
-        formatter: () => "",
+        color: "#000",
+        font: {
+          weight: 'bold',
+        },
+        formatter: ({ value }) => value.dataset.data, // Display the actual value as the label
       },
     },
   };
   return (
-    <div className="bg-white rounded-xl shadow-xl px-5 w-[100%]   h-[400px] ">
+    <div className="bg-white rounded-xl shadow-xl px-5 w-[100%] h-[200px]   sm:h-[400px] ">
       <Line className="w-10" data={data}  options={options} />
     </div>
   );

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect } from "react";
 import axios from "axios";
 import Card from "./Card";
 import GraphChat from "./GraphChart";
@@ -33,74 +33,73 @@ const ProductList = () => {
     },
   ];
 
-  const handleClick = async (productNumber) => {
-    const payload = {
-      date_type: "seven_days",
-      date: "06-01-2024",
-    };
+   const graphData = []; // Initialize graphData as an empty array
 
-    console.log("productNumber", productNumber);
 
-    try {
-      const response = await axios.post(
-        "https://100105.pythonanywhere.com/api/v3/experience_report_services/?type=user_experiences_count",
-        { ...payload, product_number: productNumber }
-      );
+    const [data, setData] = useState(graphData); // Use data instead of graphData
 
-      const responseData = response.data;
+    useEffect(() => {
+      const fetchData = async () => {
+        const payload = {
+          date_type: "seven_days",
+          date: "11-01-2024",
+        };
+  
+        const graphDataArray = [];
+  
+        for (const product of productData) {
+          try {
+            const response = await axios.post(
+              "https://100105.pythonanywhere.com/api/v3/experience_report_services/?type=user_experiences_count",
+              { ...payload, product_number: product.productNumber }
+            );
+  
+            const responseData = response.data;
+  
+            const data = {
+              productName: product.productName,
+              labels: [0, ...responseData.present_dates.map((data) => data.date)],
+              datasets: [
+                {
+                  label: product.productName,
+                  data: [0, ...responseData.present_dates.map((data) => data.count)],
+                  fill: false,
+                  backgroundColor: "rgba(0, 0, 255, 0.5)",
+                  borderColor: "rgba(0, 0, 255, 0.5)",
+                },
+              ],
+            };
+  
+            graphDataArray.push(data);
+          } catch (error) {
+            console.error("Error occurred while fetching data:", error);
+          }
+        }
+    console.log("graphDataArray" , graphDataArray)
 
-      console.log("responseData", responseData);
+  
+        setData(graphDataArray); // Update the state with the fetched data
+      };
+     
+  
+      fetchData();
 
-      // No navigation needed since we're using Link component
-    } catch (error) {
-      console.error("Error occurred while making the API call:", error);
-    }
-  };
+    }, []);
 
-  // const fetchData = async () => {
-  //   try {
-  //     const response = await axios.post(
-  //       "https://100105.pythonanywhere.com/api/v3/experience_report_services/?type=user_experiences_count",
-  //       {
-  //         date_type: "seven_days",
-  //         date: "06-01-2024",
-  //         product_number: "UXLIVINGLAB001",
-  //       }
-  //     );
+  useEffect(() => {
+    console.log("data", data); // Log the data state when it changes
+  }, [data]);
 
-  //     console.log(response.data);
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
 
-  // fetchData();
-
-  const data = {
-    labels: [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ],
-    datasets: [
-      {
-        label: "Sinusoidal",
-        data: [0, 150, 120, 250, 280, 120, 210, 180, 120, 200, 150, 200],
-        fill: false,
-        backgroundColor: "rgba(0, 0, 255, 0.5)",
-        borderColor: "rgba(0, 0, 255, 0.5)",
+  const options = {
+    scales: {
+      y: {
+        suggestedMax: 60, // Set the maximum value of the y-axis
+        stepSize: 10, // Set the interval between labels on the y-axis
       },
-    ],
+    },
   };
+ 
 
   return (
     <div className="bg-[#F4F4F4] shadow-3xl ">
@@ -111,18 +110,22 @@ const ProductList = () => {
           alt=""
         />
 
-        <div className="text-xl align-center text-white">Service status</div>
+        <div className="flex">
+          <p className="flex justify-center items-center text-white text-3xl "> Service Status </p>
+        </div>
+
       </div>
       <h1 className="ml-28 text-3xl font-bold my-10">Products List </h1>
       <div className=" container mx-auto bg-white">
         <ul className="container mx-auto">
-          {productData.map((product) => (
-            <li key={product.productNumber}>
+        {data.map((data, index) => (
+         
+            <li key={index}>
               <Card
-                productName={product.productName}
-                productNumber={product.productNumber}
+                productName={productData[index].productName}
+                productNumber={productData[index].productNumber}
               />
-              <GraphChat data={data} />
+              <GraphChat data={data} options={options} />
             </li>
           ))}
         </ul>
