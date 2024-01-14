@@ -7,7 +7,7 @@ Chart.defaults.elements.line.tension = 0.4;
 Chart.defaults.elements.point.radius = 0;
 function GraphChart({ data, graphName }) {
   const options = {
-    // responsive: true,
+    responsive: true,
     maintainAspectRatio: false,
     scales: {
       y: {
@@ -46,8 +46,8 @@ function GraphChart({ data, graphName }) {
         },
       },
       legend: {
-        position: "bottom",
-      },
+        display: false // Hide the legend labels
+    },
       datalabels: {
         align: "center",
         anchor: "center",
@@ -63,11 +63,17 @@ function GraphChart({ data, graphName }) {
         fill: 'start', // Fill the area below the line
         backgroundColor: 'rgba(222, 230, 225, 0.8)', // Shadow-like shade color
         borderColor: 'rgba(0, 0, 0, 0)', // Hide the line border
-      }
+        tension:0,
+      },
+      point: {
+        radius: 6, // Adjust the size of the dot marker as needed
+        hoverRadius: 8, // Adjust the size of the dot marker on hover as needed
+        pointStyle: 'circle', // Use 'circle' for a dot marker
+      },
     }
   };
   return (
-    <div className="bg-white rounded-xl shadow-xl px-5 w-[100%] h-[200px] sm:h-[400px]">
+    <div className="bg-white rounded-xl shadow-xl px-5 w-[100%] h-[50px] sm:h-[50px]">
       <Line data={data} options={options} />
     </div>
   );
