@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const Card = ({ productName, productNumber }) => {
   return (
     <div className="    ">
-      <div className="flex  justify-between w-[50%] sm:w-[80%] py-3">
+      <div className="flex  justify-between w-[50%] sm:w-[80%] py-2">
         <p className="md:text-md   justify-center text-sm font-bold flex  ">
           {" "}
           <Link to={`/product/${encodeURIComponent(productNumber)}`}>

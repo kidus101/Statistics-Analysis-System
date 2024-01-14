@@ -11,9 +11,9 @@ function GraphChart({ data, graphName }) {
     maintainAspectRatio: false,
     scales: {
       y: {
+        beginAtZero: true, // Set this property to true to always start the y-axis from 0
         ticks: {
           stepSize: 5,
-          min: 50,
         },
         grid: {
           display: false,
@@ -24,7 +24,7 @@ function GraphChart({ data, graphName }) {
           display: false,
         },
         title: {
-          display: true,
+          display: false,
           text: "Time",
           align: "center",
           font: {
@@ -46,34 +46,34 @@ function GraphChart({ data, graphName }) {
         },
       },
       legend: {
-        display: false // Hide the legend labels
-    },
+        display: false, // Hide the legend labels
+      },
       datalabels: {
         align: "center",
         anchor: "center",
         color: "#000",
         font: {
-          weight: 'bold',
+          weight: "bold",
         },
         formatter: (value) => value, // Display the actual value as the label
       },
     },
     elements: {
       line: {
-        fill: 'start', // Fill the area below the line
-        backgroundColor: 'rgba(222, 230, 225, 0.8)', // Shadow-like shade color
-        borderColor: 'rgba(0, 0, 0, 0)', // Hide the line border
-        tension:0,
+        fill: "start", // Fill the area below the line
+        backgroundColor: "rgba(222, 230, 225, 0.8)", // Shadow-like shade color
+        borderColor: "rgba(0, 0, 0, 0)", // Hide the line border
+        tension: 0,
       },
       point: {
         radius: 6, // Adjust the size of the dot marker as needed
         hoverRadius: 8, // Adjust the size of the dot marker on hover as needed
-        pointStyle: 'circle', // Use 'circle' for a dot marker
+        pointStyle: "circle", // Use 'circle' for a dot marker
       },
-    }
+    },
   };
   return (
-    <div className="bg-white rounded-xl shadow-xl px-5 w-[100%] h-[50px] sm:h-[50px]">
+    <div className="bg-white rounded-xl shadow-xl px-5 w-[100%] h-[50px] sm:h-[100px]">
       <Line data={data} options={options} />
     </div>
   );
