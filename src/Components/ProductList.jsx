@@ -100,7 +100,7 @@ const ProductList = () => {
   };
 
   return (
-    <div className="bg-[#F4F4F4] h-full shadow-3xl ">
+    <div className="bg-[#F4F4F4] h-full ">
       <div className="flex justify-center overflow-hidden h-[150px] px-28 sm:px-28 bg-[#131A26]  py-3">
         <img
           className="bg-[#131A26]  "
@@ -114,23 +114,23 @@ const ProductList = () => {
       </div>
       <h1 className="pl-4 sm:ml-40 text-3xl font-bold my-4">Products List </h1>
       <div className="container  my-4 mx-auto overflow-hidden bg-white">
-  <ul className="flex flex-wrap flex-col sm:flex-row">
-    {data.map((data, index) => (
-      <li className="w-full sm:w-1/2 p-4" key={index}>
-        <div className="rounded-lg">
-          <Card
-            productName={productData[index].productName}
-            productNumber={productData[index].productNumber}
-          />
-        </div>
-        <div className="mt-4">
-          <GraphChat data={data} options={options} />
-        </div>
-      </li>
-    ))}
-  </ul>
-  {/* <div className="border border-gray-200 h-px mt-2"></div> */}
-</div>
+        <ul className="flex flex-wrap   flex-col sm:flex-row">
+          {data.map((data, index) => (
+            <li className="w-full  border shadow-xl my-2   border-slate-100   sm:w-1/2  p-[10px]" key={index}>
+              <div className="rounded-lg ">
+                <Card
+                  productName={productData[index].productName}
+                  productNumber={productData[index].productNumber}
+                />
+              </div>
+              <div className="mt-4">
+                <GraphChat data={data} options={options} />
+              </div>
+            </li>
+          ))}
+        </ul>
+        {/* <div className="border border-gray-200 h-px mt-2"></div> */}
+      </div>
     </div>
   );
 };

@@ -73,7 +73,7 @@ function GraphChart({ data, graphName }) {
     },
   };
   return (
-    <div className="bg-white rounded-xl shadow-xl px-5 w-[100%] h-[50px] sm:h-[100px]">
+    <div className="bg-white rounded-xl   px-5 w-[100%] h-[50px] sm:h-[100px]">
       <Line data={data} options={options} />
     </div>
   );
